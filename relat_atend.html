@@ -63,7 +63,7 @@
     .result-container {
         margin-top: 20px;
     }
-    pre {
+    .resultado-box {
         background: #f4f4f4;
         padding: 15px;
         border-radius: 8px;
@@ -79,112 +79,4 @@
 
     <label for="meio">Meio de Contato:</label>
     <select id="meio">
-        <option value="telefone">Telefone</option>
-        <option value="presencial">Presencial</option>
-        <option value="whatsapp">WhatsApp</option>
-    </select>
-
-    <label for="dadosCliente">Cole aqui as informações do cliente:</label>
-    <textarea id="dadosCliente" rows="12" placeholder="WhatsApp exemplo:
-Nome do Cliente
-55 (55) 5555-5555
-55 (48) 9136-7400
-Protocolo: 123456789101112131
-01/01/2025 08:00
-
-Telefone/presencial exemplo:
-Nome do cliente
-(55) 99999-9999/ramal
-14/08/2025 12:12"></textarea>
-
-    <label for="solicitacao">SOLICITAÇÃO DO CLIENTE:</label>
-    <textarea id="solicitacao" rows="5"></textarea>
-
-    <label for="verificacoes">VERIFICAÇÕES:</label>
-    <textarea id="verificacoes" rows="5"></textarea>
-
-    <label for="acoes">AÇÕES REALIZADAS / ORIENTAÇÕES:</label>
-    <textarea id="acoes" rows="5"></textarea>
-
-    <div>
-        <button onclick="gerarRelatorio()">Gerar Relatório</button>
-        <button class="btn-limpar" onclick="limparCampos()">Limpar</button>
-    </div>
-
-    <div class="result-container">
-        <h3>Resultado:</h3>
-        <pre id="resultado"></pre>
-        <button onclick="copiarTexto()">Copiar Texto</button>
-    </div>
-</div>
-
-<script>
-function formatarCabecalho(meio, texto) {
-    const linhas = texto.trim().split("\n").map(l => l.trim()).filter(l => l);
-
-    if (meio === "whatsapp" && linhas.length >= 4) {
-        const nome = linhas[0];
-        const numeroCliente = linhas[1];
-        const protocolo = linhas.find(l => l.startsWith("Protocolo:")) || "";
-        const dataHora = linhas[linhas.length - 1]; // última linha = data/hora
-        return `${nome}  // ${numeroCliente} via fluctus  // ${protocolo} // ${dataHora}`;
-    }
-
-    if (meio === "telefone" && linhas.length >= 3) {
-        const nome = linhas[0];
-        const numeroCliente = linhas[1];
-        const dataHora = linhas[2]; // terceira linha = data/hora
-        return `${nome}  // ${numeroCliente} via telefone  // ${dataHora}`;
-    }
-
-    if (meio === "presencial" && linhas.length >= 3) {
-        const nome = linhas[0];
-        const ramal = linhas[1];
-        const dataHora = linhas[2]; // terceira linha = data/hora
-        return `${nome}  // ${ramal} presencial  // ${dataHora}`;
-    }
-
-    if (meio === "presencial" && linhas.length >= 2) {
-        const nome = linhas[0];
-        const dataHora = linhas[1]; // terceira linha = data/hora
-        return `${nome}  // presencial  // ${dataHora}`;
-    }
-
-    return texto;
-}
-
-function gerarRelatorio() {
-    const meio = document.getElementById("meio").value;
-    const dadosCliente = document.getElementById("dadosCliente").value;
-    const cabecalho = formatarCabecalho(meio, dadosCliente);
-
-    const solicitacao = document.getElementById("solicitacao").value.trim();
-    const verificacoes = document.getElementById("verificacoes").value.trim();
-    const acoes = document.getElementById("acoes").value.trim();
-
-    const resultado = `${cabecalho ? cabecalho + "\n\n" : ""}` 
-                    + `SOLICITAÇÃO DO CLIENTE\n${solicitacao}\n\n` 
-                    + `VERIFICAÇÕES\n${verificacoes}\n\n` 
-                    + `AÇÕES REALIZADAS / ORIENTAÇÕES\n${acoes}`;
-
-    document.getElementById("resultado").textContent = resultado;
-}
-
-function limparCampos() {
-    document.getElementById("dadosCliente").value = "";
-    document.getElementById("solicitacao").value = "";
-    document.getElementById("verificacoes").value = "";
-    document.getElementById("acoes").value = "";
-    document.getElementById("resultado").textContent = "";
-}
-
-function copiarTexto() {
-    const texto = document.getElementById("resultado").textContent;
-    navigator.clipboard.writeText(texto).then(() => {
-        alert("Relatório copiado para a área de transferência!");
-    });
-}
-</script>
-
-</body>
-</html>
+        <option va
